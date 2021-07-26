@@ -1,1 +1,1 @@
-# psychanac-graphql
+# Psychanac GraphQL
