@@ -1,0 +1,16 @@
+{
+  "name": "psychanac-graphql",
+  "description": "GraphQL",
+  "repository": "github:ben-walker/psychanac-graphql",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@types/node": "^16.4.3",
+    "prisma": "^2.27.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}
