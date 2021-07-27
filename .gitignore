@@ -13,5 +13,8 @@ lerna-debug.log*
 .DS_Store
 *.pem
 
+# Environment
+*.env*
+
 # IDE - VSCode
 .vscode
