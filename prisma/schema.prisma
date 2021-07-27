@@ -8,6 +8,11 @@ generator client {
   previewFeatures = ["nApi"]
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../node_modules/@generated/type-graphql"
+}
+
 model User {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
