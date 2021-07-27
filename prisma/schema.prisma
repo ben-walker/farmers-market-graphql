@@ -7,3 +7,8 @@ generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["nApi"]
 }
+
+model User {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+}
