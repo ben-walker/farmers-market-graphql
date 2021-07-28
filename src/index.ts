@@ -1,8 +1,10 @@
 import "reflect-metadata";
+
 import { resolvers } from "@generated/type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { buildSchema } from "type-graphql";
+
 import { NODE_ENV, PORT } from "./env";
 
 const boot = async () => {
