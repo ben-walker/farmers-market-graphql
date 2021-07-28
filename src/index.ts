@@ -5,6 +5,7 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { buildSchema } from "type-graphql";
 
+import { context } from "./context";
 import { NODE_ENV, PORT } from "./env";
 
 const boot = async () => {
@@ -14,6 +15,7 @@ const boot = async () => {
   });
 
   const server = new ApolloServer({
+    context,
     schema,
   });
   await server.start();
