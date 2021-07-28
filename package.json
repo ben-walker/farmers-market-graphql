@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "generate:prisma": "prisma generate",
+    "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
     "start": "node build",
     "typecheck": "tsc --noEmit"
