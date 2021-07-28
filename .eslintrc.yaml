@@ -25,4 +25,5 @@ rules:
   sort-imports: "off"
 
 ignorePatterns:
+  - /build
   - "**/*.gql"
