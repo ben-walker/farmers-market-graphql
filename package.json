@@ -13,7 +13,8 @@
     "lint": "eslint . --ext .ts",
     "start": "node build",
     "typecheck": "tsc --noEmit",
-    "watch:src": "ts-node-dev --exit-child --respawn --transpile-only src"
+    "watch:server": "ts-node-dev --exit-child --respawn --transpile-only src",
+    "watch:typecheck": "tsc --noEmit --watch --preserveWatchOutput"
   },
   "dependencies": {
     "@prisma/client": "^2.27.0",
@@ -31,6 +32,7 @@
     "@types/node": "^16.4.4",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
+    "concurrently": "^6.2.0",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
