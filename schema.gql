@@ -182,22 +182,26 @@ input StringWithAggregatesFilter {
 type User {
   createdAt: DateTime!
   id: String!
+  username: String!
 }
 
 type UserCountAggregate {
   _all: Int!
   createdAt: Int!
   id: Int!
+  username: Int!
 }
 
 input UserCreateInput {
   createdAt: DateTime
   id: String
+  username: String!
 }
 
 input UserCreateManyInput {
   createdAt: DateTime
   id: String
+  username: String!
 }
 
 type UserGroupBy {
@@ -206,26 +210,31 @@ type UserGroupBy {
   _min: UserMinAggregate
   createdAt: DateTime!
   id: String!
+  username: String!
 }
 
 type UserMaxAggregate {
   createdAt: DateTime
   id: String
+  username: String
 }
 
 type UserMinAggregate {
   createdAt: DateTime
   id: String
+  username: String
 }
 
 input UserOrderByInput {
   createdAt: SortOrder
   id: SortOrder
+  username: SortOrder
 }
 
 enum UserScalarFieldEnum {
   createdAt
   id
+  username
 }
 
 input UserScalarWhereWithAggregatesInput {
@@ -234,16 +243,19 @@ input UserScalarWhereWithAggregatesInput {
   OR: [UserScalarWhereWithAggregatesInput!]
   createdAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
+  username: StringWithAggregatesFilter
 }
 
 input UserUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
 }
 
 input UserUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
 }
 
 input UserWhereInput {
@@ -252,8 +264,10 @@ input UserWhereInput {
   OR: [UserWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
+  username: StringFilter
 }
 
 input UserWhereUniqueInput {
   id: String
+  username: String
 }
