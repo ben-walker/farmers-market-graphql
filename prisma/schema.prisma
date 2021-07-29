@@ -15,4 +15,5 @@ generator typegraphql {
 model User {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
+  username  String   @unique
 }
