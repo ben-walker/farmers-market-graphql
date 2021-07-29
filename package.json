@@ -9,12 +9,11 @@
   "scripts": {
     "build": "tsc",
     "dev": "./scripts/dev.sh",
+    "dev:server": "ts-node-dev --exit-child --respawn src",
     "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
     "start": "node build",
-    "typecheck": "tsc --noEmit",
-    "watch:server": "ts-node-dev --exit-child --respawn --transpile-only src",
-    "watch:typecheck": "tsc --noEmit --watch --preserveWatchOutput"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/client": "^2.27.0",
