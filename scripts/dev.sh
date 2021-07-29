@@ -6,5 +6,4 @@ export DATABASE_URL="postgresql://postgres:password@localhost:5432"
 [ ! -d "node_modules" ] && npm ci
 
 npm run generate \
-&& docker compose up --detach \
-&& npx concurrently --kill-others npm:watch:*
+&& npx concurrently --kill-others "docker compose up" "npm:watch:*"

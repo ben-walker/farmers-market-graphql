@@ -8,8 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev:start": "./scripts/dev.start.sh",
-    "dev:stop": "./scripts/dev.stop.sh",
+    "dev": "./scripts/dev.sh",
     "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
     "start": "node build",
