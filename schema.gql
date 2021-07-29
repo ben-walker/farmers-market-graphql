@@ -3,10 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type AffectedRowsOutput {
-  count: Int!
-}
-
 type AggregateUser {
   _count: UserCountAggregate
   _max: UserMaxAggregate
@@ -17,10 +13,6 @@ type AggregateUser {
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
-
-input DateTimeFieldUpdateOperationsInput {
-  set: DateTime
-}
 
 input DateTimeFilter {
   equals: DateTime
@@ -45,16 +37,6 @@ input DateTimeWithAggregatesFilter {
   lte: DateTime
   not: NestedDateTimeWithAggregatesFilter
   notIn: [DateTime!]
-}
-
-type Mutation {
-  createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
-  createUser(data: UserCreateInput!): User!
-  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
-  deleteUser(where: UserWhereUniqueInput!): User
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 input NestedDateTimeFilter {
@@ -142,10 +124,6 @@ enum SortOrder {
   desc
 }
 
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
 input StringFilter {
   contains: String
   endsWith: String
@@ -190,16 +168,6 @@ type UserCountAggregate {
   id: Int!
 }
 
-input UserCreateInput {
-  createdAt: DateTime
-  id: String
-}
-
-input UserCreateManyInput {
-  createdAt: DateTime
-  id: String
-}
-
 type UserGroupBy {
   _count: UserCountAggregate
   _max: UserMaxAggregate
@@ -234,16 +202,6 @@ input UserScalarWhereWithAggregatesInput {
   OR: [UserScalarWhereWithAggregatesInput!]
   createdAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
-}
-
-input UserUpdateInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-}
-
-input UserUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
 }
 
 input UserWhereInput {
