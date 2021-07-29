@@ -1,7 +1,7 @@
 {
-  "name": "psychanac-graphql",
+  "name": "farmers-market-graphql",
   "description": "GraphQL",
-  "repository": "github:ben-walker/psychanac-graphql",
+  "repository": "github:ben-walker/farmers-market-graphql",
   "license": "BSD-3-Clause",
   "engines": {
     "node": "16.x"
