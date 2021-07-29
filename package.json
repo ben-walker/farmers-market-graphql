@@ -12,7 +12,8 @@
     "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
     "start": "node build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "watch:src": "ts-node-dev --exit-child --respawn --transpile-only src"
   },
   "dependencies": {
     "@prisma/client": "^2.27.0",
@@ -37,6 +38,7 @@
     "prettier": "^2.3.2",
     "prisma": "^2.27.0",
     "ts-node": "^10.1.0",
+    "ts-node-dev": "^1.1.8",
     "typegraphql-prisma": "^0.14.7",
     "typescript": "^4.3.5"
   }

@@ -2,5 +2,6 @@
 
 export DATABASE_URL="postgresql://postgres:password@localhost:5432"
 
-# Start services
-docker compose up -d
+npm run generate \
+&& docker compose up --detach \
+&& npm run watch:src
