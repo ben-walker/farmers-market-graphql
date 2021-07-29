@@ -12,16 +12,7 @@ generator typegraphql {
   provider = "typegraphql-prisma"
 }
 
-model Post {
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-}
-
 model User {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
-  posts     Post[]
-  username  String   @unique
 }

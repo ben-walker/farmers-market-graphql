@@ -7,12 +7,6 @@ type AffectedRowsOutput {
   count: Int!
 }
 
-type AggregatePost {
-  _count: PostCountAggregate
-  _max: PostMaxAggregate
-  _min: PostMinAggregate
-}
-
 type AggregateUser {
   _count: UserCountAggregate
   _max: UserMaxAggregate
@@ -54,19 +48,12 @@ input DateTimeWithAggregatesFilter {
 }
 
 type Mutation {
-  createManyPost(data: [PostCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
-  createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
-  deleteManyPost(where: PostWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
-  deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
-  updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  upsertPost(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
   upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -137,185 +124,10 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
-type Post {
-  author: User!
-  authorId: String!
-  createdAt: DateTime!
-  id: String!
-}
-
-type PostCountAggregate {
-  _all: Int!
-  authorId: Int!
-  createdAt: Int!
-  id: Int!
-}
-
-input PostCreateInput {
-  author: UserCreateNestedOneWithoutPostsInput!
-  createdAt: DateTime
-  id: String
-}
-
-input PostCreateManyAuthorInput {
-  createdAt: DateTime
-  id: String
-}
-
-input PostCreateManyAuthorInputEnvelope {
-  data: [PostCreateManyAuthorInput!]!
-  skipDuplicates: Boolean
-}
-
-input PostCreateManyInput {
-  authorId: String!
-  createdAt: DateTime
-  id: String
-}
-
-input PostCreateNestedManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
-  create: [PostCreateWithoutAuthorInput!]
-  createMany: PostCreateManyAuthorInputEnvelope
-}
-
-input PostCreateOrConnectWithoutAuthorInput {
-  create: PostCreateWithoutAuthorInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostCreateWithoutAuthorInput {
-  createdAt: DateTime
-  id: String
-}
-
-type PostGroupBy {
-  _count: PostCountAggregate
-  _max: PostMaxAggregate
-  _min: PostMinAggregate
-  authorId: String!
-  createdAt: DateTime!
-  id: String!
-}
-
-input PostListRelationFilter {
-  every: PostWhereInput
-  none: PostWhereInput
-  some: PostWhereInput
-}
-
-type PostMaxAggregate {
-  authorId: String
-  createdAt: DateTime
-  id: String
-}
-
-type PostMinAggregate {
-  authorId: String
-  createdAt: DateTime
-  id: String
-}
-
-input PostOrderByInput {
-  authorId: SortOrder
-  createdAt: SortOrder
-  id: SortOrder
-}
-
-enum PostScalarFieldEnum {
-  authorId
-  createdAt
-  id
-}
-
-input PostScalarWhereInput {
-  AND: [PostScalarWhereInput!]
-  NOT: [PostScalarWhereInput!]
-  OR: [PostScalarWhereInput!]
-  authorId: StringFilter
-  createdAt: DateTimeFilter
-  id: StringFilter
-}
-
-input PostScalarWhereWithAggregatesInput {
-  AND: [PostScalarWhereWithAggregatesInput!]
-  NOT: [PostScalarWhereWithAggregatesInput!]
-  OR: [PostScalarWhereWithAggregatesInput!]
-  authorId: StringWithAggregatesFilter
-  createdAt: DateTimeWithAggregatesFilter
-  id: StringWithAggregatesFilter
-}
-
-input PostUpdateInput {
-  author: UserUpdateOneRequiredWithoutPostsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateManyWithWhereWithoutAuthorInput {
-  data: PostUpdateManyMutationInput!
-  where: PostScalarWhereInput!
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
-  create: [PostCreateWithoutAuthorInput!]
-  createMany: PostCreateManyAuthorInputEnvelope
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  data: PostUpdateWithoutAuthorInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostUpdateWithoutAuthorInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  create: PostCreateWithoutAuthorInput!
-  update: PostUpdateWithoutAuthorInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  NOT: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  author: UserRelationFilter
-  authorId: StringFilter
-  createdAt: DateTimeFilter
-  id: StringFilter
-}
-
-input PostWhereUniqueInput {
-  id: String
-}
-
 type Query {
-  aggregatePost(cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): AggregatePost!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
-  findFirstPost(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
-  groupByPost(by: [PostScalarFieldEnum!]!, having: PostScalarWhereWithAggregatesInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [PostGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
-  post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
   user(where: UserWhereUniqueInput!): User
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
@@ -370,45 +182,22 @@ input StringWithAggregatesFilter {
 type User {
   createdAt: DateTime!
   id: String!
-  posts(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
-  username: String!
 }
 
 type UserCountAggregate {
   _all: Int!
   createdAt: Int!
   id: Int!
-  username: Int!
 }
 
 input UserCreateInput {
   createdAt: DateTime
   id: String
-  posts: PostCreateNestedManyWithoutAuthorInput
-  username: String!
 }
 
 input UserCreateManyInput {
   createdAt: DateTime
   id: String
-  username: String!
-}
-
-input UserCreateNestedOneWithoutPostsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutPostsInput
-  create: UserCreateWithoutPostsInput
-}
-
-input UserCreateOrConnectWithoutPostsInput {
-  create: UserCreateWithoutPostsInput!
-  where: UserWhereUniqueInput!
-}
-
-input UserCreateWithoutPostsInput {
-  createdAt: DateTime
-  id: String
-  username: String!
 }
 
 type UserGroupBy {
@@ -417,36 +206,26 @@ type UserGroupBy {
   _min: UserMinAggregate
   createdAt: DateTime!
   id: String!
-  username: String!
 }
 
 type UserMaxAggregate {
   createdAt: DateTime
   id: String
-  username: String
 }
 
 type UserMinAggregate {
   createdAt: DateTime
   id: String
-  username: String
 }
 
 input UserOrderByInput {
   createdAt: SortOrder
   id: SortOrder
-  username: SortOrder
-}
-
-input UserRelationFilter {
-  is: UserWhereInput
-  isNot: UserWhereInput
 }
 
 enum UserScalarFieldEnum {
   createdAt
   id
-  username
 }
 
 input UserScalarWhereWithAggregatesInput {
@@ -455,39 +234,16 @@ input UserScalarWhereWithAggregatesInput {
   OR: [UserScalarWhereWithAggregatesInput!]
   createdAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
-  username: StringWithAggregatesFilter
 }
 
 input UserUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
-  posts: PostUpdateManyWithoutAuthorInput
-  username: StringFieldUpdateOperationsInput
 }
 
 input UserUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
-  username: StringFieldUpdateOperationsInput
-}
-
-input UserUpdateOneRequiredWithoutPostsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutPostsInput
-  create: UserCreateWithoutPostsInput
-  update: UserUpdateWithoutPostsInput
-  upsert: UserUpsertWithoutPostsInput
-}
-
-input UserUpdateWithoutPostsInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  username: StringFieldUpdateOperationsInput
-}
-
-input UserUpsertWithoutPostsInput {
-  create: UserCreateWithoutPostsInput!
-  update: UserUpdateWithoutPostsInput!
 }
 
 input UserWhereInput {
@@ -496,11 +252,8 @@ input UserWhereInput {
   OR: [UserWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
-  posts: PostListRelationFilter
-  username: StringFilter
 }
 
 input UserWhereUniqueInput {
   id: String
-  username: String
 }
