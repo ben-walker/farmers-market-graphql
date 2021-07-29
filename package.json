@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "dev": "./scripts/dev.sh",
     "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
     "start": "node build",
