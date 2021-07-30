@@ -13,6 +13,8 @@ generator typegraphql {
 }
 
 model User {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  email         String    @unique
+  emailVerified DateTime?
+  id            String    @id @default(cuid())
 }
