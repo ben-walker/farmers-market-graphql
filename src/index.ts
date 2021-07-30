@@ -1,19 +1,11 @@
-import "reflect-metadata";
-
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import { buildSchema } from "type-graphql";
 
 import { context } from "./context";
-import { NODE_ENV, PORT } from "./env";
-import { resolvers } from "./resolvers";
+import { PORT } from "./env";
+import { schema } from "./schema";
 
 const boot = async () => {
-  const schema = await buildSchema({
-    emitSchemaFile: NODE_ENV !== "production",
-    resolvers,
-  });
-
   const server = new ApolloServer({
     context,
     schema,
