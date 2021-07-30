@@ -16,7 +16,7 @@ const boot = async () => {
   server.applyMiddleware({ app });
 
   app.listen(PORT, () => {
-    console.info(`GraphQL server: port ${PORT}, path ${server.graphqlPath}`);
+    console.info(`🚀 GraphQL server: port ${PORT}, path ${server.graphqlPath}`);
   });
 };
 
