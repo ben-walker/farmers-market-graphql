@@ -1,0 +1,27 @@
+name: Generate
+
+on:
+  push:
+
+jobs:
+  graphql-schema:
+    name: GraphQL Schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 16.x
+
+      - name: Emit Schema
+        run: |
+          npm ci
+          npm run generate
+          npm run schema
+
+      - name: Commit Schema
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Generate GraphQL schema
+          file_pattern: schema.gql

@@ -12,6 +12,7 @@
     "dev:server": "ts-node-dev --exit-child --respawn src",
     "generate": "prisma generate",
     "lint": "eslint . --ext .ts",
+    "schema": "ts-node ./scripts/emit-schema",
     "start": "node build",
     "typecheck": "tsc --noEmit"
   },
