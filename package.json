@@ -10,9 +10,9 @@
     "build": "tsc",
     "dev": "./scripts/dev.sh",
     "dev:server": "ts-node-dev --exit-child --respawn src",
-    "generate": "prisma generate",
+    "generate:prisma": "prisma generate",
+    "generate:schema": "ts-node ./scripts/emit-schema",
     "lint": "eslint . --ext .ts",
-    "schema": "ts-node ./scripts/emit-schema",
     "start": "node build",
     "typecheck": "tsc --noEmit"
   },

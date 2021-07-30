@@ -17,7 +17,6 @@ jobs:
       - name: Run ESLint
         run: |
           npm ci
-          npm run generate
           npm run lint
 
   typecheck:
@@ -33,5 +32,4 @@ jobs:
       - name: Run TSC
         run: |
           npm ci
-          npm run generate
           npm run typecheck
