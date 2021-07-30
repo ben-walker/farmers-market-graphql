@@ -13,7 +13,7 @@
     "generate:prisma": "prisma generate",
     "generate:schema": "ts-node ./scripts/emit-schema",
     "lint": "eslint . --ext .ts",
-    "start": "node build",
+    "start": "node build/src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

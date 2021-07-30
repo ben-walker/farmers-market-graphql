@@ -11,12 +11,12 @@
     "moduleResolution": "node",
     "noUncheckedIndexedAccess": true,
     "outDir": "build",
-    "rootDir": "src",
+    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "esnext"
   },
-  "include": ["src/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
