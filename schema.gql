@@ -231,6 +231,7 @@ type UserCountAggregate {
   email: Int!
   emailVerified: Int!
   id: Int!
+  passwordHash: Int!
 }
 
 type UserGroupBy {
@@ -241,6 +242,7 @@ type UserGroupBy {
   email: String!
   emailVerified: DateTime
   id: String!
+  passwordHash: String!
 }
 
 type UserMaxAggregate {
@@ -248,6 +250,7 @@ type UserMaxAggregate {
   email: String
   emailVerified: DateTime
   id: String
+  passwordHash: String
 }
 
 type UserMinAggregate {
@@ -255,6 +258,7 @@ type UserMinAggregate {
   email: String
   emailVerified: DateTime
   id: String
+  passwordHash: String
 }
 
 input UserOrderByInput {
@@ -262,6 +266,7 @@ input UserOrderByInput {
   email: SortOrder
   emailVerified: SortOrder
   id: SortOrder
+  passwordHash: SortOrder
 }
 
 enum UserScalarFieldEnum {
@@ -269,6 +274,7 @@ enum UserScalarFieldEnum {
   email
   emailVerified
   id
+  passwordHash
 }
 
 input UserScalarWhereWithAggregatesInput {
@@ -279,6 +285,7 @@ input UserScalarWhereWithAggregatesInput {
   email: StringWithAggregatesFilter
   emailVerified: DateTimeNullableWithAggregatesFilter
   id: StringWithAggregatesFilter
+  passwordHash: StringWithAggregatesFilter
 }
 
 input UserWhereInput {
@@ -289,6 +296,7 @@ input UserWhereInput {
   email: StringFilter
   emailVerified: DateTimeNullableFilter
   id: StringFilter
+  passwordHash: StringFilter
 }
 
 input UserWhereUniqueInput {
