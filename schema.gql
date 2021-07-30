@@ -25,6 +25,31 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
+  notIn: [DateTime!]
+}
+
 input DateTimeWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedDateTimeFilter
@@ -50,6 +75,31 @@ input NestedDateTimeFilter {
   notIn: [DateTime!]
 }
 
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
+  notIn: [DateTime!]
+}
+
 input NestedDateTimeWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedDateTimeFilter
@@ -72,6 +122,17 @@ input NestedIntFilter {
   lt: Int
   lte: Int
   not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
   notIn: [Int!]
 }
 
@@ -159,12 +220,16 @@ input StringWithAggregatesFilter {
 
 type User {
   createdAt: DateTime!
+  email: String!
+  emailVerified: DateTime
   id: String!
 }
 
 type UserCountAggregate {
   _all: Int!
   createdAt: Int!
+  email: Int!
+  emailVerified: Int!
   id: Int!
 }
 
@@ -173,26 +238,36 @@ type UserGroupBy {
   _max: UserMaxAggregate
   _min: UserMinAggregate
   createdAt: DateTime!
+  email: String!
+  emailVerified: DateTime
   id: String!
 }
 
 type UserMaxAggregate {
   createdAt: DateTime
+  email: String
+  emailVerified: DateTime
   id: String
 }
 
 type UserMinAggregate {
   createdAt: DateTime
+  email: String
+  emailVerified: DateTime
   id: String
 }
 
 input UserOrderByInput {
   createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
   id: SortOrder
 }
 
 enum UserScalarFieldEnum {
   createdAt
+  email
+  emailVerified
   id
 }
 
@@ -201,6 +276,8 @@ input UserScalarWhereWithAggregatesInput {
   NOT: [UserScalarWhereWithAggregatesInput!]
   OR: [UserScalarWhereWithAggregatesInput!]
   createdAt: DateTimeWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  emailVerified: DateTimeNullableWithAggregatesFilter
   id: StringWithAggregatesFilter
 }
 
@@ -209,9 +286,12 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   createdAt: DateTimeFilter
+  email: StringFilter
+  emailVerified: DateTimeNullableFilter
   id: StringFilter
 }
 
 input UserWhereUniqueInput {
+  email: String
   id: String
 }
