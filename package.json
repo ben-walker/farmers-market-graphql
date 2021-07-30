@@ -15,7 +15,6 @@
     "generate:schema": "ts-node ./scripts/emit-schema",
     "lint": "eslint . --ext .ts",
     "start": "node build/src",
-    "studio": "prisma studio",
     "sync:db": "prisma db push && prisma db seed --preview-feature",
     "typecheck": "tsc --noEmit"
   },
