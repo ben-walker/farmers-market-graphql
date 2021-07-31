@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import session, { SessionOptions } from "express-session";
@@ -5,6 +6,12 @@ import session, { SessionOptions } from "express-session";
 import { context } from "./context";
 import { PORT, SECRET } from "./env";
 import { schema } from "./schema";
+
+declare module "express-session" {
+  interface SessionData {
+    user: User;
+  }
+}
 
 const sessionOptions: SessionOptions = {
   cookie: {
