@@ -30,18 +30,20 @@ export class UserResolver {
   @Mutation(() => User)
   async signUp(
     @Arg("input") { email, password }: SignUpInput,
-    @Ctx() { prisma }: Context
+    @Ctx() { prisma, req }: Context
   ): Promise<User> {
     const passwordHash = await hash(password, { type: argon2id });
-    return prisma.user.create({
+    const user = await prisma.user.create({
       data: { email, passwordHash },
     });
+    req.session.user = user;
+    return user;
   }
 
   @Mutation(() => User)
   async logIn(
     @Arg("input") { email, password }: LogInInput,
-    @Ctx() { prisma }: Context
+    @Ctx() { prisma, req }: Context
   ): Promise<User> {
     const errorMessage = "Incorrect email or password";
     const user = await prisma.user.findUnique({ where: { email } });
@@ -52,6 +54,7 @@ export class UserResolver {
     if (!isPasswordValid) {
       throw new Error(errorMessage);
     }
+    req.session.user = user;
     return user;
   }
 }
