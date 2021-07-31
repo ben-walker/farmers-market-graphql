@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export DATABASE_URL="postgresql://postgres:password@localhost:5432"
+export REDIS_URL="redis://:@localhost:6379"
 
 # Install node_modules if missing
 [ ! -d "node_modules" ] && npm ci

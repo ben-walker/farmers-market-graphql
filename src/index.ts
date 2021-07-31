@@ -1,10 +1,12 @@
 import { User } from "@prisma/client";
 import { ApolloServer } from "apollo-server-express";
+import connectRedis from "connect-redis";
 import express from "express";
 import session, { SessionOptions } from "express-session";
+import Redis from "ioredis";
 
 import { context } from "./context";
-import { PORT, SECRET } from "./env";
+import { PORT, REDIS_URL, SECRET } from "./env";
 import { schema } from "./schema";
 
 declare module "express-session" {
@@ -12,6 +14,9 @@ declare module "express-session" {
     user: User;
   }
 }
+
+const redis = new Redis(REDIS_URL);
+const RedisStore = connectRedis(session);
 
 const sessionOptions: SessionOptions = {
   cookie: {
@@ -22,8 +27,10 @@ const sessionOptions: SessionOptions = {
   },
   name: "user_session",
   saveUninitialized: false,
+  resave: false,
   rolling: true,
   secret: SECRET,
+  store: new RedisStore({ client: redis }),
 };
 
 const boot = async () => {
