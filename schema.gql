@@ -64,6 +64,16 @@ input DateTimeWithAggregatesFilter {
   notIn: [DateTime!]
 }
 
+input LogInInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  logIn(input: LogInInput!): User!
+  signUp(input: SignUpInput!): User!
+}
+
 input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -178,6 +188,11 @@ type Query {
 enum QueryMode {
   default
   insensitive
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
 }
 
 enum SortOrder {

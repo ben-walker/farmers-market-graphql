@@ -6,12 +6,13 @@ import {
   GroupByUserResolver,
 } from "@generated/type-graphql";
 
-const generatedResolvers = [
+import { UserResolver } from "./User";
+
+export const resolvers = [
   AggregateUserResolver,
   FindFirstUserResolver,
   FindManyUserResolver,
   FindUniqueUserResolver,
   GroupByUserResolver,
+  UserResolver,
 ] as const;
-
-export const resolvers = [...generatedResolvers] as const;
