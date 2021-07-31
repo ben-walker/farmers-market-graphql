@@ -12,7 +12,7 @@
     "dev:prisma": "chokidar \"prisma\" --command \"npm run sync:db\"",
     "dev:server": "ts-node-dev --exit-child --respawn src",
     "generate:prisma": "prisma generate",
-    "generate:schema": "ts-node ./scripts/emit-schema",
+    "generate:schema": "ts-node scripts/emit-schema",
     "lint": "eslint . --ext .ts",
     "start": "node build/src",
     "sync:db": "prisma db push && prisma db seed --preview-feature",
