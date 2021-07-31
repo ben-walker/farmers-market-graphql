@@ -1,5 +1,10 @@
-import { emitSchemaDefinitionFileSync } from "type-graphql";
+import { emitSchemaDefinitionFile } from "type-graphql";
 
-import { schema } from "../src/schema";
+import { buildSchema } from "../src/schema";
 
-emitSchemaDefinitionFileSync("schema.gql", schema);
+const emitSchema = async () => {
+  const schema = await buildSchema();
+  await emitSchemaDefinitionFile("schema.gql", schema);
+};
+
+emitSchema().catch(console.error);

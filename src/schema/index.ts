@@ -1,11 +1,13 @@
 import "reflect-metadata";
 
-import { buildSchemaSync } from "type-graphql";
+import { GraphQLSchema } from "graphql";
+import { buildSchema as typeGraphqlBuildSchema } from "type-graphql";
 
 import { NODE_ENV } from "../env";
 import { resolvers } from "./resolvers";
 
-export const schema = buildSchemaSync({
-  emitSchemaFile: NODE_ENV !== "production",
-  resolvers,
-});
+export const buildSchema = async (): Promise<GraphQLSchema> =>
+  await typeGraphqlBuildSchema({
+    emitSchemaFile: NODE_ENV !== "production",
+    resolvers,
+  });

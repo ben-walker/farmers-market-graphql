@@ -7,7 +7,7 @@ import Redis from "ioredis";
 
 import { context } from "./context";
 import { PORT, REDIS_URL, SECRET } from "./env";
-import { schema } from "./schema";
+import { buildSchema } from "./schema";
 
 declare module "express-session" {
   interface SessionData {
@@ -34,6 +34,7 @@ const sessionOptions: SessionOptions = {
 };
 
 const boot = async () => {
+  const schema = await buildSchema();
   const server = new ApolloServer({
     context,
     schema,
