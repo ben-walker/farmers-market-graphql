@@ -16,7 +16,7 @@ export type Context = {
 };
 
 export const context = async ({ req }: { req: Request }): Promise<Context> => {
-  const userId = req.session.userId;
+  const userId = req.session.userId || "";
   const user = await prisma.user.findUnique({ where: { id: userId } });
   return { prisma, req, user };
 };
