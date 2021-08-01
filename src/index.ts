@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { ApolloServer } from "apollo-server-express";
 import connectRedis from "connect-redis";
 import express from "express";
@@ -8,12 +7,6 @@ import Redis from "ioredis";
 import { context } from "./context";
 import { PORT, REDIS_URL, SECRET } from "./env";
 import { buildSchema } from "./schema";
-
-declare module "express-session" {
-  interface SessionData {
-    user: User;
-  }
-}
 
 const redis = new Redis(REDIS_URL);
 const RedisStore = connectRedis(session);

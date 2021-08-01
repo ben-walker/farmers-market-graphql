@@ -36,7 +36,7 @@ export class UserResolver {
     const user = await prisma.user.create({
       data: { email, passwordHash },
     });
-    req.session.user = user;
+    req.session.userId = user.id;
     return user;
   }
 
@@ -54,7 +54,7 @@ export class UserResolver {
     if (!isPasswordValid) {
       throw new Error(errorMessage);
     }
-    req.session.user = user;
+    req.session.userId = user.id;
     return user;
   }
 }
