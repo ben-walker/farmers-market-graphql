@@ -36,7 +36,10 @@ const boot = async () => {
 
   const app = express();
   app.use(session(sessionOptions));
-  server.applyMiddleware({ app });
+  server.applyMiddleware({
+    app,
+    cors: { credentials: true },
+  });
 
   app.listen(PORT, () => {
     console.info(`🚀 GraphQL server: port ${PORT}, path ${server.graphqlPath}`);
