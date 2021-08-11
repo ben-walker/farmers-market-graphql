@@ -5,7 +5,7 @@ import session, { SessionOptions } from "express-session";
 import Redis from "ioredis";
 
 import { context } from "./context";
-import { CORS_ORIGIN, PORT, REDIS_URL, SECRET } from "./env";
+import { CORS_ORIGIN, NODE_ENV, PORT, REDIS_URL, SECRET } from "./env";
 import { buildSchema } from "./schema";
 
 const redis = new Redis(REDIS_URL);
@@ -15,7 +15,7 @@ const sessionOptions: SessionOptions = {
   cookie: {
     httpOnly: true,
     maxAge: 30 * 24 * 60 * 60 * 1_000, // 30 days
-    sameSite: true,
+    sameSite: NODE_ENV === "production" || "none",
     secure: true,
   },
   name: "user_session",
