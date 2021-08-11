@@ -5,7 +5,7 @@ import session, { SessionOptions } from "express-session";
 import Redis from "ioredis";
 
 import { context } from "./context";
-import { PORT, REDIS_URL, SECRET } from "./env";
+import { CORS_ORIGIN, PORT, REDIS_URL, SECRET } from "./env";
 import { buildSchema } from "./schema";
 
 const redis = new Redis(REDIS_URL);
@@ -38,7 +38,7 @@ const boot = async () => {
   app.use(session(sessionOptions));
   server.applyMiddleware({
     app,
-    cors: { credentials: true },
+    cors: { credentials: true, origin: CORS_ORIGIN },
   });
 
   app.listen(PORT, () => {
