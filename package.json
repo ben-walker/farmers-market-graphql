@@ -4,7 +4,7 @@
   "repository": "github:ben-walker/farmers-market-graphql",
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "16.x"
+    "node": "16"
   },
   "scripts": {
     "build": "tsc",
