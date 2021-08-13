@@ -41,9 +41,8 @@ const boot = async () => {
     cors: { credentials: true, origin: CORS_ORIGIN },
   });
 
-  app.listen(PORT, () => {
-    console.info(`🚀 GraphQL server: port ${PORT}, path ${server.graphqlPath}`);
-  });
+  await new Promise<void>((resolve) => app.listen({ port: PORT }, resolve));
+  console.info(`🚀 GraphQL server: port ${PORT}, path ${server.graphqlPath}`);
 };
 
 boot().catch(console.error);
