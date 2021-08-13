@@ -9,6 +9,6 @@ export CORS_ORIGIN="https://studio.apollographql.com"
 [ ! -d "node_modules" ] && npm ci
 
 docker compose up -d \
-&& sleep 5 \
-&& npm run sync:db \
-&& npx concurrently --kill-others npm:dev:*
+  && sleep 5 \
+  && npm run sync:db \
+  && npx concurrently --kill-others npm:dev:*
