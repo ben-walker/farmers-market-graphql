@@ -1,0 +1,46 @@
+# Dependencies
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+*.pem
+
+# Environment
+*.env*
+
+# IDE - VSCode
+.vscode
+
+# Build
+/build
+
+# Docker
+*docker*
+Dockerfile
+
+# Documentation
+**/*.md
+
+# GraphQL
+**/*.gql
+**/*.graphql
+
+# GitHub
+.github
+
+# Scripts
+scripts
+
+# Git
+.git*
+
+# ESLint
+*eslint*
