@@ -1,1 +1,1 @@
-# Farmers' Market GraphQL
+# Farmers Market GraphQL

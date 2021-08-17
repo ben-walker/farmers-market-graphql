@@ -1,6 +1,6 @@
 {
   "name": "farmers-market-graphql",
-  "description": "Farmers' market GraphQL API",
+  "description": "Farmers market GraphQL API",
   "repository": "github:ben-walker/farmers-market-graphql",
   "license": "BSD-3-Clause",
   "engines": {
