@@ -190,6 +190,38 @@ enum QueryMode {
   insensitive
 }
 
+input ShopOwnerListRelationFilter {
+  every: ShopOwnerWhereInput
+  none: ShopOwnerWhereInput
+  some: ShopOwnerWhereInput
+}
+
+input ShopOwnerWhereInput {
+  AND: [ShopOwnerWhereInput!]
+  NOT: [ShopOwnerWhereInput!]
+  OR: [ShopOwnerWhereInput!]
+  ownedAt: DateTimeFilter
+  shop: ShopRelationFilter
+  shopId: StringFilter
+  user: UserRelationFilter
+  userId: StringFilter
+}
+
+input ShopRelationFilter {
+  is: ShopWhereInput
+  isNot: ShopWhereInput
+}
+
+input ShopWhereInput {
+  AND: [ShopWhereInput!]
+  NOT: [ShopWhereInput!]
+  OR: [ShopWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  name: StringFilter
+  owners: ShopOwnerListRelationFilter
+}
+
 input SignUpInput {
   email: String!
   password: String!
@@ -284,6 +316,11 @@ input UserOrderByInput {
   passwordHash: SortOrder
 }
 
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
 enum UserScalarFieldEnum {
   createdAt
   email
@@ -312,6 +349,7 @@ input UserWhereInput {
   emailVerified: DateTimeNullableFilter
   id: StringFilter
   passwordHash: StringFilter
+  shops: ShopOwnerListRelationFilter
 }
 
 input UserWhereUniqueInput {
