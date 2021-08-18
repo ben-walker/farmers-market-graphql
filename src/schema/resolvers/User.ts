@@ -1,4 +1,12 @@
 import { User } from "@generated/type-graphql";
+import {
+  AggregateUserResolver,
+  FindFirstUserResolver,
+  FindManyUserResolver,
+  FindUniqueUserResolver,
+  GroupByUserResolver,
+  UserRelationsResolver,
+} from "@generated/type-graphql";
 import { argon2id, hash, verify } from "argon2";
 import { IsEmail } from "class-validator";
 import { Arg, Ctx, Field, InputType, Mutation, Resolver } from "type-graphql";
@@ -58,3 +66,13 @@ export class UserResolver {
     return user;
   }
 }
+
+export const userResolvers = [
+  UserResolver,
+  AggregateUserResolver,
+  FindFirstUserResolver,
+  FindManyUserResolver,
+  FindUniqueUserResolver,
+  GroupByUserResolver,
+  UserRelationsResolver,
+] as const;

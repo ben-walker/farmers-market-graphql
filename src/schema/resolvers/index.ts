@@ -1,18 +1,9 @@
-import {
-  AggregateUserResolver,
-  FindFirstUserResolver,
-  FindManyUserResolver,
-  FindUniqueUserResolver,
-  GroupByUserResolver,
-} from "@generated/type-graphql";
-
-import { UserResolver } from "./User";
+import { shopResolvers } from "./Shop";
+import { shopOwnerResolvers } from "./ShopOwner";
+import { userResolvers } from "./User";
 
 export const resolvers = [
-  AggregateUserResolver,
-  FindFirstUserResolver,
-  FindManyUserResolver,
-  FindUniqueUserResolver,
-  GroupByUserResolver,
-  UserResolver,
+  ...shopResolvers,
+  ...shopOwnerResolvers,
+  ...userResolvers,
 ] as const;
