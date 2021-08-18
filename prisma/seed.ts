@@ -19,16 +19,8 @@ export const seed = async (): Promise<void> => {
 
   await prisma.shop.createMany({
     data: [
-      { id: "1", name: "Cat's Organic Produce" },
-      { id: "2", name: "Bull's Decadent Legumes" },
-    ],
-    skipDuplicates: true,
-  });
-
-  await prisma.shopOwner.createMany({
-    data: [
-      { userId: "4", shopId: "1" },
-      { userId: "5", shopId: "2" },
+      { id: "1", name: "Cat's Organic Produce", ownerId: "4" },
+      { id: "2", name: "Bull's Decadent Legumes", ownerId: "5" },
     ],
     skipDuplicates: true,
   });

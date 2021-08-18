@@ -13,28 +13,19 @@ generator typegraphql {
 }
 
 model Shop {
-  createdAt DateTime    @default(now())
-  id        String      @id @default(cuid())
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
   name      String
-  owners    ShopOwner[]
-}
-
-model ShopOwner {
-  ownedAt DateTime @default(now())
-  shop    Shop     @relation(fields: [shopId], references: [id])
-  shopId  String
-  user    User     @relation(fields: [userId], references: [id])
-  userId  String
-
-  @@id([shopId, userId])
+  owner     User     @relation(fields: [ownerId], references: [id])
+  ownerId   String
 }
 
 model User {
-  createdAt     DateTime    @default(now())
-  email         String      @unique
+  createdAt     DateTime  @default(now())
+  email         String    @unique
   emailVerified DateTime?
-  id            String      @id @default(cuid())
+  id            String    @id @default(cuid())
   /// @TypeGraphQL.omit(output: true)
   passwordHash  String
-  shops         ShopOwner[]
+  shops         Shop[]
 }

@@ -9,12 +9,6 @@ type AggregateShop {
   _min: ShopMinAggregate
 }
 
-type AggregateShopOwner {
-  _count: ShopOwnerCountAggregate
-  _max: ShopOwnerMaxAggregate
-  _min: ShopOwnerMinAggregate
-}
-
 type AggregateUser {
   _count: UserCountAggregate
   _max: UserMaxAggregate
@@ -191,17 +185,12 @@ input NestedStringWithAggregatesFilter {
 
 type Query {
   aggregateShop(cursor: ShopWhereUniqueInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): AggregateShop!
-  aggregateShopOwner(cursor: ShopOwnerWhereUniqueInput, orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): AggregateShopOwner!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   findFirstShop(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): Shop
-  findFirstShopOwner(cursor: ShopOwnerWhereUniqueInput, distinct: [ShopOwnerScalarFieldEnum!], orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): ShopOwner
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
   groupByShop(by: [ShopScalarFieldEnum!]!, having: ShopScalarWhereWithAggregatesInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [ShopGroupBy!]!
-  groupByShopOwner(by: [ShopOwnerScalarFieldEnum!]!, having: ShopOwnerScalarWhereWithAggregatesInput, orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): [ShopOwnerGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   shop(where: ShopWhereUniqueInput!): Shop
-  shopOwner(where: ShopOwnerWhereUniqueInput!): ShopOwner
-  shopOwners(cursor: ShopOwnerWhereUniqueInput, distinct: [ShopOwnerScalarFieldEnum!], orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): [ShopOwner!]!
   shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
   user(where: UserWhereUniqueInput!): User
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
@@ -216,7 +205,8 @@ type Shop {
   createdAt: DateTime!
   id: String!
   name: String!
-  owners(cursor: ShopOwnerWhereUniqueInput, distinct: [ShopOwnerScalarFieldEnum!], orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): [ShopOwner!]!
+  owner: User!
+  ownerId: String!
 }
 
 type ShopCountAggregate {
@@ -224,6 +214,7 @@ type ShopCountAggregate {
   createdAt: Int!
   id: Int!
   name: Int!
+  ownerId: Int!
 }
 
 type ShopGroupBy {
@@ -233,118 +224,41 @@ type ShopGroupBy {
   createdAt: DateTime!
   id: String!
   name: String!
+  ownerId: String!
+}
+
+input ShopListRelationFilter {
+  every: ShopWhereInput
+  none: ShopWhereInput
+  some: ShopWhereInput
 }
 
 type ShopMaxAggregate {
   createdAt: DateTime
   id: String
   name: String
+  ownerId: String
 }
 
 type ShopMinAggregate {
   createdAt: DateTime
   id: String
   name: String
+  ownerId: String
 }
 
 input ShopOrderByInput {
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
-}
-
-type ShopOwner {
-  ownedAt: DateTime!
-  shop: Shop!
-  shopId: String!
-  user: User!
-  userId: String!
-}
-
-type ShopOwnerCountAggregate {
-  _all: Int!
-  ownedAt: Int!
-  shopId: Int!
-  userId: Int!
-}
-
-type ShopOwnerGroupBy {
-  _count: ShopOwnerCountAggregate
-  _max: ShopOwnerMaxAggregate
-  _min: ShopOwnerMinAggregate
-  ownedAt: DateTime!
-  shopId: String!
-  userId: String!
-}
-
-input ShopOwnerListRelationFilter {
-  every: ShopOwnerWhereInput
-  none: ShopOwnerWhereInput
-  some: ShopOwnerWhereInput
-}
-
-type ShopOwnerMaxAggregate {
-  ownedAt: DateTime
-  shopId: String
-  userId: String
-}
-
-type ShopOwnerMinAggregate {
-  ownedAt: DateTime
-  shopId: String
-  userId: String
-}
-
-input ShopOwnerOrderByInput {
-  ownedAt: SortOrder
-  shopId: SortOrder
-  userId: SortOrder
-}
-
-enum ShopOwnerScalarFieldEnum {
-  ownedAt
-  shopId
-  userId
-}
-
-input ShopOwnerScalarWhereWithAggregatesInput {
-  AND: [ShopOwnerScalarWhereWithAggregatesInput!]
-  NOT: [ShopOwnerScalarWhereWithAggregatesInput!]
-  OR: [ShopOwnerScalarWhereWithAggregatesInput!]
-  ownedAt: DateTimeWithAggregatesFilter
-  shopId: StringWithAggregatesFilter
-  userId: StringWithAggregatesFilter
-}
-
-input ShopOwnerShopIdUserIdCompoundUniqueInput {
-  shopId: String!
-  userId: String!
-}
-
-input ShopOwnerWhereInput {
-  AND: [ShopOwnerWhereInput!]
-  NOT: [ShopOwnerWhereInput!]
-  OR: [ShopOwnerWhereInput!]
-  ownedAt: DateTimeFilter
-  shop: ShopRelationFilter
-  shopId: StringFilter
-  user: UserRelationFilter
-  userId: StringFilter
-}
-
-input ShopOwnerWhereUniqueInput {
-  shopId_userId: ShopOwnerShopIdUserIdCompoundUniqueInput
-}
-
-input ShopRelationFilter {
-  is: ShopWhereInput
-  isNot: ShopWhereInput
+  ownerId: SortOrder
 }
 
 enum ShopScalarFieldEnum {
   createdAt
   id
   name
+  ownerId
 }
 
 input ShopScalarWhereWithAggregatesInput {
@@ -354,6 +268,7 @@ input ShopScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
   name: StringWithAggregatesFilter
+  ownerId: StringWithAggregatesFilter
 }
 
 input ShopWhereInput {
@@ -363,7 +278,8 @@ input ShopWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   name: StringFilter
-  owners: ShopOwnerListRelationFilter
+  owner: UserRelationFilter
+  ownerId: StringFilter
 }
 
 input ShopWhereUniqueInput {
@@ -418,7 +334,7 @@ type User {
   email: String!
   emailVerified: DateTime
   id: String!
-  shops(cursor: ShopOwnerWhereUniqueInput, distinct: [ShopOwnerScalarFieldEnum!], orderBy: [ShopOwnerOrderByInput!], skip: Int, take: Int, where: ShopOwnerWhereInput): [ShopOwner!]!
+  shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
 }
 
 type UserCountAggregate {
@@ -498,7 +414,7 @@ input UserWhereInput {
   emailVerified: DateTimeNullableFilter
   id: StringFilter
   passwordHash: StringFilter
-  shops: ShopOwnerListRelationFilter
+  shops: ShopListRelationFilter
 }
 
 input UserWhereUniqueInput {
