@@ -183,6 +183,48 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+type Product {
+  createdAt: DateTime!
+  id: String!
+  name: String!
+  shopId: String!
+}
+
+input ProductListRelationFilter {
+  every: ProductWhereInput
+  none: ProductWhereInput
+  some: ProductWhereInput
+}
+
+input ProductOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  shopId: SortOrder
+}
+
+enum ProductScalarFieldEnum {
+  createdAt
+  id
+  name
+  shopId
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  name: StringFilter
+  shop: ShopRelationFilter
+  shopId: StringFilter
+}
+
+input ProductWhereUniqueInput {
+  id: String
+}
+
 type Query {
   aggregateShop(cursor: ShopWhereUniqueInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): AggregateShop!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
@@ -207,6 +249,7 @@ type Shop {
   name: String!
   owner: User!
   ownerId: String!
+  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
 }
 
 type ShopCountAggregate {
@@ -254,6 +297,11 @@ input ShopOrderByInput {
   ownerId: SortOrder
 }
 
+input ShopRelationFilter {
+  is: ShopWhereInput
+  isNot: ShopWhereInput
+}
+
 enum ShopScalarFieldEnum {
   createdAt
   id
@@ -280,6 +328,7 @@ input ShopWhereInput {
   name: StringFilter
   owner: UserRelationFilter
   ownerId: StringFilter
+  products: ProductListRelationFilter
 }
 
 input ShopWhereUniqueInput {
