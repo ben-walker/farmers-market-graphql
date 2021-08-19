@@ -24,4 +24,14 @@ export const seed = async (): Promise<void> => {
     ],
     skipDuplicates: true,
   });
+
+  await prisma.product.createMany({
+    data: [
+      { id: "1", name: "Red pepper", shopId: "1" },
+      { id: "2", name: "Zucchini", shopId: "1" },
+      { id: "3", name: "Lentils", shopId: "2" },
+      { id: "4", name: "Kidney beans", shopId: "2" },
+    ],
+    skipDuplicates: true,
+  });
 };

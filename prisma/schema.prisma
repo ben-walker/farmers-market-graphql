@@ -12,12 +12,21 @@ generator typegraphql {
   provider = "typegraphql-prisma"
 }
 
-model Shop {
+model Product {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   name      String
-  owner     User     @relation(fields: [ownerId], references: [id])
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  shopId    String
+}
+
+model Shop {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  name      String
+  owner     User      @relation(fields: [ownerId], references: [id])
   ownerId   String
+  products  Product[]
 }
 
 model User {
