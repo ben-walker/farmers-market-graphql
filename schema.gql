@@ -3,6 +3,12 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type AggregateProduct {
+  _count: ProductCountAggregate
+  _max: ProductMaxAggregate
+  _min: ProductMinAggregate
+}
+
 type AggregateShop {
   _count: ShopCountAggregate
   _max: ShopMaxAggregate
@@ -187,6 +193,25 @@ type Product {
   createdAt: DateTime!
   id: String!
   name: String!
+  shop: Shop!
+  shopId: String!
+}
+
+type ProductCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  name: Int!
+  shopId: Int!
+}
+
+type ProductGroupBy {
+  _count: ProductCountAggregate
+  _max: ProductMaxAggregate
+  _min: ProductMinAggregate
+  createdAt: DateTime!
+  id: String!
+  name: String!
   shopId: String!
 }
 
@@ -194,6 +219,20 @@ input ProductListRelationFilter {
   every: ProductWhereInput
   none: ProductWhereInput
   some: ProductWhereInput
+}
+
+type ProductMaxAggregate {
+  createdAt: DateTime
+  id: String
+  name: String
+  shopId: String
+}
+
+type ProductMinAggregate {
+  createdAt: DateTime
+  id: String
+  name: String
+  shopId: String
 }
 
 input ProductOrderByInput {
@@ -208,6 +247,16 @@ enum ProductScalarFieldEnum {
   id
   name
   shopId
+}
+
+input ProductScalarWhereWithAggregatesInput {
+  AND: [ProductScalarWhereWithAggregatesInput!]
+  NOT: [ProductScalarWhereWithAggregatesInput!]
+  OR: [ProductScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  shopId: StringWithAggregatesFilter
 }
 
 input ProductWhereInput {
@@ -226,12 +275,17 @@ input ProductWhereUniqueInput {
 }
 
 type Query {
+  aggregateProduct(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): AggregateProduct!
   aggregateShop(cursor: ShopWhereUniqueInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): AggregateShop!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  findFirstProduct(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): Product
   findFirstShop(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): Shop
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
+  groupByProduct(by: [ProductScalarFieldEnum!]!, having: ProductScalarWhereWithAggregatesInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [ProductGroupBy!]!
   groupByShop(by: [ShopScalarFieldEnum!]!, having: ShopScalarWhereWithAggregatesInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [ShopGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
+  product(where: ProductWhereUniqueInput!): Product
+  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
   shop(where: ShopWhereUniqueInput!): Shop
   shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
   user(where: UserWhereUniqueInput!): User
