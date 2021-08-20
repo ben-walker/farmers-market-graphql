@@ -15,7 +15,7 @@ export CORS_ORIGIN="https://studio.apollographql.com"
 # Install node_modules if missing
 [ ! -d "node_modules" ] && npm install
 
-docker compose up -d \
+docker compose up --detach \
   && wait_for_postgres \
   && npm run sync:db \
   && npx concurrently --kill-others npm:dev:*
