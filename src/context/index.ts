@@ -1,12 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { Request } from "express";
 
-declare module "express-session" {
-  interface SessionData {
-    userId: string;
-  }
-}
-
 const prisma = new PrismaClient();
 
 export type Context = {
