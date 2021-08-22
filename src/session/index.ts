@@ -4,12 +4,6 @@ import session, { SessionOptions } from "express-session";
 import { IS_PRODUCTION, SECRET } from "../constants";
 import { redisClient } from "../redis";
 
-declare module "express-session" {
-  interface SessionData {
-    userId: string;
-  }
-}
-
 const RedisStore = connectRedis(session);
 
 export const sessionOptions: SessionOptions = {
