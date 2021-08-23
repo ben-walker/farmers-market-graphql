@@ -13,6 +13,7 @@ services:
     ports:
       - 6379:6379
 
+  # TODO: Migrate and seed DB
   api:
     build:
       context: .
