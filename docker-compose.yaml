@@ -28,5 +28,6 @@ services:
       SECRET: oo6iP6dQRC/qm2WlUn3Tej+LocObV801
       DATABASE_URL: postgresql://postgres:password@postgres:5432
       REDIS_URL: redis://:@redis:6379
+      INTROSPECTION: true
     ports:
       - 4000:4000

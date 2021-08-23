@@ -6,3 +6,5 @@ export const IS_PRODUCTION = NODE_ENV === "production";
 export const SECRET = env.SECRET || "";
 export const REDIS_URL = env.REDIS_URL;
 export const CORS_ORIGIN = env.CORS_ORIGIN?.split(",") || true;
+export const INTROSPECTION =
+  !IS_PRODUCTION || env.INTROSPECTION?.toLowerCase() === "true";

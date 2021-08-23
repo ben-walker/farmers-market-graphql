@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import session from "express-session";
 
-import { CORS_ORIGIN, PORT } from "./constants";
+import { CORS_ORIGIN, INTROSPECTION, PORT } from "./constants";
 import { context } from "./context";
 import { buildSchema } from "./schema";
 import { sessionOptions } from "./session";
@@ -11,6 +11,7 @@ const boot = async () => {
   const schema = await buildSchema();
   const server = new ApolloServer({
     context,
+    introspection: INTROSPECTION,
     schema,
   });
   await server.start();
