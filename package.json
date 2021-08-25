@@ -9,13 +9,12 @@
   "scripts": {
     "build": "tsc",
     "dev": "./scripts/dev.sh",
-    "dev:prisma": "chokidar \"prisma\" --command \"npm run sync:db\"",
-    "dev:server": "ts-node-dev --exit-child --respawn src",
-    "generate:prisma": "prisma generate",
-    "generate:schema": "ts-node scripts/emit-schema",
+    "graphql:generate": "ts-node scripts/emit-schema",
     "lint": "eslint . --ext .ts",
+    "prisma:db:sync": "prisma db push && prisma db seed --preview-feature",
+    "prisma:dev": "chokidar \"prisma\" --command \"npm run prisma:db:sync\"",
     "start": "node build/src",
-    "sync:db": "prisma db push && prisma db seed --preview-feature",
+    "start:dev": "ts-node-dev --exit-child --respawn src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
