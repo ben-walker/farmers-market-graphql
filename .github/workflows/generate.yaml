@@ -17,7 +17,7 @@ jobs:
       - name: Emit Schema
         run: |
           npm ci
-          npm run generate:schema
+          npm run graphql:generate
 
       - name: Commit Schema
         uses: stefanzweifel/git-auto-commit-action@v4
