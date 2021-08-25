@@ -17,5 +17,5 @@ export CORS_ORIGIN="https://studio.apollographql.com"
 
 docker compose up --detach \
   && wait_for_postgres \
-  && npm run sync:db \
-  && npx concurrently --kill-others npm:dev:*
+  && npm run prisma:db:sync \
+  && npx concurrently --kill-others npm:*:dev
