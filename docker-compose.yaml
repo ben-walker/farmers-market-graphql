@@ -13,7 +13,6 @@ services:
     ports:
       - 6379:6379
 
-  # TODO: Migrate and seed DB
   api:
     build:
       context: .
@@ -23,6 +22,7 @@ services:
     depends_on:
       - postgres
       - redis
+    entrypoint: /app/scripts/entrypoint.sh
     environment:
       PORT: 4000
       NODE_ENV: production
