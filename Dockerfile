@@ -15,4 +15,5 @@ COPY --from=build /root/package.json .
 COPY --from=build /root/node_modules ./node_modules/
 COPY --from=build /root/build ./build/
 COPY --from=build /root/prisma ./prisma/
+COPY --from=build /root/scripts ./scripts/
 CMD [ "npm", "start" ]
