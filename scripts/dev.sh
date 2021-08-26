@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Setup the environment
 export DATABASE_URL="postgresql://postgres:password@localhost:5432"
