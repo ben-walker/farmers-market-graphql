@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "./scripts/dev.sh",
+    "dev:down": "./scripts/dev-down.sh",
     "graphql:generate": "ts-node scripts/emit-schema",
     "lint": "eslint . --ext .ts",
     "prisma:db:sync": "prisma db push && prisma db seed --preview-feature",
