@@ -19,18 +19,32 @@ export const seed = async (): Promise<void> => {
 
   await prisma.shop.createMany({
     data: [
-      { id: "1", name: "Cat's Organic Produce", ownerId: "4" },
-      { id: "2", name: "Bull's Decadent Legumes", ownerId: "5" },
+      { id: "1", name: "Fox's Pasta Emporium", ownerId: "1" },
+      { id: "2", name: "Cow's Spicy Enchiladas", ownerId: "2" },
+      { id: "3", name: "Dog's Raw Nut Butters", ownerId: "3" },
+      { id: "4", name: "Cat's Elegant Coffee", ownerId: "4" },
+      { id: "5", name: "Bull's Decadent Legumes", ownerId: "5" },
     ],
     skipDuplicates: true,
   });
 
   await prisma.product.createMany({
     data: [
-      { id: "1", name: "Red pepper", shopId: "1" },
-      { id: "2", name: "Zucchini", shopId: "1" },
-      { id: "3", name: "Lentils", shopId: "2" },
-      { id: "4", name: "Kidney beans", shopId: "2" },
+      { name: "Ravioli", shopId: "1" },
+      { name: "Spaghetti", shopId: "1" },
+      { name: "Campanelle", shopId: "1" },
+      { name: "Regular Enchilada", shopId: "2" },
+      { name: "Extra Spicy Enchilada", shopId: "2" },
+      { name: "Mild Enchilada", shopId: "2" },
+      { name: "Almond Butter", shopId: "3" },
+      { name: "Peanut Butter", shopId: "3" },
+      { name: "Cashew Butter", shopId: "3" },
+      { name: "Espresso Blend", shopId: "4" },
+      { name: "Whole Bean", shopId: "4" },
+      { name: "Swiss-Water Decaf", shopId: "4" },
+      { name: "Kidney Beans", shopId: "5" },
+      { name: "Chickpeas", shopId: "5" },
+      { name: "Lentils", shopId: "5" },
     ],
     skipDuplicates: true,
   });
