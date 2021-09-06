@@ -33,6 +33,7 @@ model User {
   createdAt     DateTime  @default(now())
   email         String    @unique
   emailVerified DateTime?
+  fullName      String
   id            String    @id @default(cuid())
   /// @TypeGraphQL.omit(output: true)
   passwordHash  String

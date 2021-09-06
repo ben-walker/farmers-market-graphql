@@ -20,6 +20,9 @@ class SignUpInput implements Partial<User> {
   email!: string;
 
   @Field()
+  fullName!: string;
+
+  @Field()
   password!: string;
 }
 
@@ -37,12 +40,12 @@ class LogInInput implements Partial<User> {
 export class UserResolver {
   @Mutation(() => User)
   async signUp(
-    @Arg("input") { email, password }: SignUpInput,
+    @Arg("input") { email, fullName, password }: SignUpInput,
     @Ctx() { prisma, req }: Context
   ): Promise<User> {
     const passwordHash = await hash(password, { type: argon2id });
     const user = await prisma.user.create({
-      data: { email, passwordHash },
+      data: { email, fullName, passwordHash },
     });
     req.session.userId = user.id;
     return user;

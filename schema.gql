@@ -391,6 +391,7 @@ input ShopWhereUniqueInput {
 
 input SignUpInput {
   email: String!
+  fullName: String!
   password: String!
 }
 
@@ -436,6 +437,7 @@ type User {
   createdAt: DateTime!
   email: String!
   emailVerified: DateTime
+  fullName: String!
   id: String!
   shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
 }
@@ -445,6 +447,7 @@ type UserCountAggregate {
   createdAt: Int!
   email: Int!
   emailVerified: Int!
+  fullName: Int!
   id: Int!
   passwordHash: Int!
 }
@@ -456,6 +459,7 @@ type UserGroupBy {
   createdAt: DateTime!
   email: String!
   emailVerified: DateTime
+  fullName: String!
   id: String!
   passwordHash: String!
 }
@@ -464,6 +468,7 @@ type UserMaxAggregate {
   createdAt: DateTime
   email: String
   emailVerified: DateTime
+  fullName: String
   id: String
   passwordHash: String
 }
@@ -472,6 +477,7 @@ type UserMinAggregate {
   createdAt: DateTime
   email: String
   emailVerified: DateTime
+  fullName: String
   id: String
   passwordHash: String
 }
@@ -480,6 +486,7 @@ input UserOrderByInput {
   createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
+  fullName: SortOrder
   id: SortOrder
   passwordHash: SortOrder
 }
@@ -493,6 +500,7 @@ enum UserScalarFieldEnum {
   createdAt
   email
   emailVerified
+  fullName
   id
   passwordHash
 }
@@ -504,6 +512,7 @@ input UserScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   email: StringWithAggregatesFilter
   emailVerified: DateTimeNullableWithAggregatesFilter
+  fullName: StringWithAggregatesFilter
   id: StringWithAggregatesFilter
   passwordHash: StringWithAggregatesFilter
 }
@@ -515,6 +524,7 @@ input UserWhereInput {
   createdAt: DateTimeFilter
   email: StringFilter
   emailVerified: DateTimeNullableFilter
+  fullName: StringFilter
   id: StringFilter
   passwordHash: StringFilter
   shops: ShopListRelationFilter
