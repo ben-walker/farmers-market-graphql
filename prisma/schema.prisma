@@ -4,8 +4,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["nApi"]
+  provider = "prisma-client-js"
 }
 
 generator typegraphql {
@@ -16,7 +15,7 @@ model Product {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   name      String
-  shop      Shop     @relation(fields: [shopId], references: [id])
+  shop      Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
   shopId    String
 }
 
@@ -24,7 +23,7 @@ model Shop {
   createdAt DateTime  @default(now())
   id        String    @id @default(cuid())
   name      String
-  owner     User      @relation(fields: [ownerId], references: [id])
+  owner     User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId   String
   products  Product[]
 }
@@ -35,7 +34,7 @@ model User {
   emailVerified DateTime?
   fullName      String
   id            String    @id @default(cuid())
-  /// @TypeGraphQL.omit(output: true)
+  /// @TypeGraphQL.omit(input: true, output: true)
   passwordHash  String
   shops         Shop[]
 }

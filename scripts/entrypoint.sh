@@ -8,5 +8,5 @@ done
 echo "postgres:5432 - accepting connections"
 
 npx prisma migrate deploy
-npx prisma db seed --preview-feature
+npx prisma db seed
 npm start

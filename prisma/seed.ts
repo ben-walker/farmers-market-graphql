@@ -3,7 +3,7 @@ import { argon2id, hash } from "argon2";
 
 const prisma = new PrismaClient();
 
-export const seed = async (): Promise<void> => {
+const seed = async (): Promise<void> => {
   const passwordHash = await hash("password", { type: argon2id });
 
   await prisma.user.createMany({
@@ -49,3 +49,14 @@ export const seed = async (): Promise<void> => {
     skipDuplicates: true,
   });
 };
+
+seed()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(() => {
+    void (async () => {
+      await prisma.$disconnect();
+    })();
+  });

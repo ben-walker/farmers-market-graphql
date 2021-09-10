@@ -205,6 +205,13 @@ type ProductCountAggregate {
   shopId: Int!
 }
 
+input ProductCountOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  shopId: SortOrder
+}
+
 type ProductGroupBy {
   _count: ProductCountAggregate
   _max: ProductMaxAggregate
@@ -228,6 +235,13 @@ type ProductMaxAggregate {
   shopId: String
 }
 
+input ProductMaxOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  shopId: SortOrder
+}
+
 type ProductMinAggregate {
   createdAt: DateTime
   id: String
@@ -235,10 +249,32 @@ type ProductMinAggregate {
   shopId: String
 }
 
-input ProductOrderByInput {
+input ProductMinOrderByAggregateInput {
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
+  shopId: SortOrder
+}
+
+input ProductOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProductOrderByWithAggregationInput {
+  _count: ProductCountOrderByAggregateInput
+  _max: ProductMaxOrderByAggregateInput
+  _min: ProductMinOrderByAggregateInput
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  shopId: SortOrder
+}
+
+input ProductOrderByWithRelationInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  shop: ShopOrderByWithRelationInput
   shopId: SortOrder
 }
 
@@ -275,21 +311,21 @@ input ProductWhereUniqueInput {
 }
 
 type Query {
-  aggregateProduct(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): AggregateProduct!
-  aggregateShop(cursor: ShopWhereUniqueInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): AggregateShop!
-  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
-  findFirstProduct(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): Product
-  findFirstShop(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): Shop
-  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
-  groupByProduct(by: [ProductScalarFieldEnum!]!, having: ProductScalarWhereWithAggregatesInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [ProductGroupBy!]!
-  groupByShop(by: [ShopScalarFieldEnum!]!, having: ShopScalarWhereWithAggregatesInput, orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [ShopGroupBy!]!
-  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
+  aggregateProduct(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): AggregateProduct!
+  aggregateShop(cursor: ShopWhereUniqueInput, orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): AggregateShop!
+  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+  findFirstProduct(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): Product
+  findFirstShop(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): Shop
+  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
+  groupByProduct(by: [ProductScalarFieldEnum!]!, having: ProductScalarWhereWithAggregatesInput, orderBy: [ProductOrderByWithAggregationInput!], skip: Int, take: Int, where: ProductWhereInput): [ProductGroupBy!]!
+  groupByShop(by: [ShopScalarFieldEnum!]!, having: ShopScalarWhereWithAggregatesInput, orderBy: [ShopOrderByWithAggregationInput!], skip: Int, take: Int, where: ShopWhereInput): [ShopGroupBy!]!
+  groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   product(where: ProductWhereUniqueInput!): Product
-  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
   shop(where: ShopWhereUniqueInput!): Shop
-  shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
+  shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
 }
 
 enum QueryMode {
@@ -298,12 +334,17 @@ enum QueryMode {
 }
 
 type Shop {
+  _count: ShopCount
   createdAt: DateTime!
   id: String!
   name: String!
   owner: User!
   ownerId: String!
-  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+  products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+}
+
+type ShopCount {
+  products: Int!
 }
 
 type ShopCountAggregate {
@@ -312,6 +353,13 @@ type ShopCountAggregate {
   id: Int!
   name: Int!
   ownerId: Int!
+}
+
+input ShopCountOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  ownerId: SortOrder
 }
 
 type ShopGroupBy {
@@ -337,6 +385,13 @@ type ShopMaxAggregate {
   ownerId: String
 }
 
+input ShopMaxOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  ownerId: SortOrder
+}
+
 type ShopMinAggregate {
   createdAt: DateTime
   id: String
@@ -344,11 +399,34 @@ type ShopMinAggregate {
   ownerId: String
 }
 
-input ShopOrderByInput {
+input ShopMinOrderByAggregateInput {
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
   ownerId: SortOrder
+}
+
+input ShopOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ShopOrderByWithAggregationInput {
+  _count: ShopCountOrderByAggregateInput
+  _max: ShopMaxOrderByAggregateInput
+  _min: ShopMinOrderByAggregateInput
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  ownerId: SortOrder
+}
+
+input ShopOrderByWithRelationInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  owner: UserOrderByWithRelationInput
+  ownerId: SortOrder
+  products: ProductOrderByRelationAggregateInput
 }
 
 input ShopRelationFilter {
@@ -434,12 +512,17 @@ input StringWithAggregatesFilter {
 }
 
 type User {
+  _count: UserCount
   createdAt: DateTime!
   email: String!
   emailVerified: DateTime
   fullName: String!
   id: String!
-  shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
+  shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
+}
+
+type UserCount {
+  shops: Int!
 }
 
 type UserCountAggregate {
@@ -450,6 +533,14 @@ type UserCountAggregate {
   fullName: Int!
   id: Int!
   passwordHash: Int!
+}
+
+input UserCountOrderByAggregateInput {
+  createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
+  fullName: SortOrder
+  id: SortOrder
 }
 
 type UserGroupBy {
@@ -473,6 +564,14 @@ type UserMaxAggregate {
   passwordHash: String
 }
 
+input UserMaxOrderByAggregateInput {
+  createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
+  fullName: SortOrder
+  id: SortOrder
+}
+
 type UserMinAggregate {
   createdAt: DateTime
   email: String
@@ -482,13 +581,32 @@ type UserMinAggregate {
   passwordHash: String
 }
 
-input UserOrderByInput {
+input UserMinOrderByAggregateInput {
   createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
   fullName: SortOrder
   id: SortOrder
-  passwordHash: SortOrder
+}
+
+input UserOrderByWithAggregationInput {
+  _count: UserCountOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+  createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
+  fullName: SortOrder
+  id: SortOrder
+}
+
+input UserOrderByWithRelationInput {
+  createdAt: SortOrder
+  email: SortOrder
+  emailVerified: SortOrder
+  fullName: SortOrder
+  id: SortOrder
+  shops: ShopOrderByRelationAggregateInput
 }
 
 input UserRelationFilter {
@@ -514,7 +632,6 @@ input UserScalarWhereWithAggregatesInput {
   emailVerified: DateTimeNullableWithAggregatesFilter
   fullName: StringWithAggregatesFilter
   id: StringWithAggregatesFilter
-  passwordHash: StringWithAggregatesFilter
 }
 
 input UserWhereInput {
@@ -526,7 +643,6 @@ input UserWhereInput {
   emailVerified: DateTimeNullableFilter
   fullName: StringFilter
   id: StringFilter
-  passwordHash: StringFilter
   shops: ShopListRelationFilter
 }
 
