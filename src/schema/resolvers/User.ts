@@ -1,10 +1,10 @@
-import { User } from "@generated/type-graphql";
 import {
   AggregateUserResolver,
   FindFirstUserResolver,
   FindManyUserResolver,
   FindUniqueUserResolver,
   GroupByUserResolver,
+  User,
   UserRelationsResolver,
 } from "@generated/type-graphql";
 import { argon2id, hash, verify } from "argon2";
