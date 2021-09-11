@@ -12,6 +12,7 @@
     "dev:down": "./scripts/dev-down.sh",
     "graphql:generate": "ts-node scripts/emit-schema",
     "lint": "eslint . --ext .ts",
+    "migrate:create": "./scripts/create-migration.sh",
     "prisma:db:sync": "prisma db push && prisma db seed",
     "prisma:dev": "chokidar \"prisma\" --command \"npm run prisma:db:sync\"",
     "start": "node build/src",

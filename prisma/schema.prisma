@@ -20,12 +20,21 @@ model Product {
 }
 
 model Shop {
-  createdAt DateTime  @default(now())
-  id        String    @id @default(cuid())
-  name      String
-  owner     User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId   String
-  products  Product[]
+  coordinates ShopCoordinates?
+  createdAt   DateTime         @default(now())
+  id          String           @id @default(cuid())
+  name        String
+  owner       User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String
+  products    Product[]
+}
+
+model ShopCoordinates {
+  id        String @id @default(cuid())
+  latitude  Float
+  longitude Float
+  shop      Shop   @relation(fields: [shopId], references: [id])
+  shopId    String
 }
 
 model User {
