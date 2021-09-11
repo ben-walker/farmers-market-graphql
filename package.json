@@ -17,6 +17,7 @@
     "prisma:dev": "chokidar \"prisma\" --command \"npm run prisma:db:sync\"",
     "start": "node build/src",
     "start:dev": "ts-node-dev --exit-child --respawn src",
+    "studio": "./scripts/studio.sh",
     "typecheck": "tsc --noEmit"
   },
   "prisma": {
