@@ -76,6 +76,17 @@ input DateTimeWithAggregatesFilter {
   notIn: [DateTime!]
 }
 
+input FloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
 input LogInInput {
   email: String!
   password: String!
@@ -134,6 +145,17 @@ input NestedDateTimeWithAggregatesFilter {
   lte: DateTime
   not: NestedDateTimeWithAggregatesFilter
   notIn: [DateTime!]
+}
+
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
 }
 
 input NestedIntFilter {
@@ -335,12 +357,44 @@ enum QueryMode {
 
 type Shop {
   _count: ShopCount
+  coordinates: ShopCoordinates
   createdAt: DateTime!
   id: String!
   name: String!
   owner: User!
   ownerId: String!
   products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+}
+
+type ShopCoordinates {
+  id: String!
+  latitude: Float!
+  longitude: Float!
+  shopId: String!
+}
+
+input ShopCoordinatesOrderByWithRelationInput {
+  id: SortOrder
+  latitude: SortOrder
+  longitude: SortOrder
+  shop: ShopOrderByWithRelationInput
+  shopId: SortOrder
+}
+
+input ShopCoordinatesRelationFilter {
+  is: ShopCoordinatesWhereInput
+  isNot: ShopCoordinatesWhereInput
+}
+
+input ShopCoordinatesWhereInput {
+  AND: [ShopCoordinatesWhereInput!]
+  NOT: [ShopCoordinatesWhereInput!]
+  OR: [ShopCoordinatesWhereInput!]
+  id: StringFilter
+  latitude: FloatFilter
+  longitude: FloatFilter
+  shop: ShopRelationFilter
+  shopId: StringFilter
 }
 
 type ShopCount {
@@ -421,6 +475,7 @@ input ShopOrderByWithAggregationInput {
 }
 
 input ShopOrderByWithRelationInput {
+  coordinates: ShopCoordinatesOrderByWithRelationInput
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
@@ -455,6 +510,7 @@ input ShopWhereInput {
   AND: [ShopWhereInput!]
   NOT: [ShopWhereInput!]
   OR: [ShopWhereInput!]
+  coordinates: ShopCoordinatesRelationFilter
   createdAt: DateTimeFilter
   id: StringFilter
   name: StringFilter
