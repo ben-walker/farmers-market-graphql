@@ -28,6 +28,17 @@ const seed = async (): Promise<void> => {
     skipDuplicates: true,
   });
 
+  await prisma.shopCoordinates.createMany({
+    data: [
+      { id: "1", latitude: 37, longitude: -122, shopId: "1" },
+      { id: "2", latitude: 37.1, longitude: -122.1, shopId: "2" },
+      { id: "3", latitude: 37.2, longitude: -122.2, shopId: "3" },
+      { id: "4", latitude: 37.3, longitude: -122.3, shopId: "4" },
+      { id: "5", latitude: 37.4, longitude: -122.4, shopId: "5" },
+    ],
+    skipDuplicates: true,
+  });
+
   await prisma.product.createMany({
     data: [
       { id: "1", name: "Ravioli", shopId: "1" },
