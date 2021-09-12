@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "./scripts/dev.sh",
-    "dev:down": "./scripts/dev-down.sh",
+    "down": "./scripts/down.sh",
     "graphql:generate": "ts-node scripts/emit-schema",
     "lint": "eslint . --ext .ts",
     "migrate:create": "./scripts/create-migration.sh",
