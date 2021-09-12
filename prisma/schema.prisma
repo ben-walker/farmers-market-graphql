@@ -27,6 +27,7 @@ model Shop {
   owner       User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId     String
   products    Product[]
+  serveRadius Int?
 }
 
 model ShopCoordinates {

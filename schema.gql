@@ -10,9 +10,11 @@ type AggregateProduct {
 }
 
 type AggregateShop {
+  _avg: ShopAvgAggregate
   _count: ShopCountAggregate
   _max: ShopMaxAggregate
   _min: ShopMinAggregate
+  _sum: ShopSumAggregate
 }
 
 type AggregateUser {
@@ -87,6 +89,33 @@ input FloatFilter {
   notIn: [Float!]
 }
 
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input IntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  notIn: [Int!]
+}
+
 input LogInInput {
   email: String!
   password: String!
@@ -158,6 +187,17 @@ input NestedFloatFilter {
   notIn: [Float!]
 }
 
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -177,6 +217,22 @@ input NestedIntNullableFilter {
   lt: Int
   lte: Int
   not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedIntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableWithAggregatesFilter
   notIn: [Int!]
 }
 
@@ -345,6 +401,7 @@ type Query {
   product(where: ProductWhereUniqueInput!): Product
   products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
   shop(where: ShopWhereUniqueInput!): Shop
+  shopSpatialSearch(latitude: Float!, longitude: Float!): [Shop!]!
   shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
   user(where: UserWhereUniqueInput!): User
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
@@ -364,6 +421,15 @@ type Shop {
   owner: User!
   ownerId: String!
   products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+  serveRadius: Int
+}
+
+type ShopAvgAggregate {
+  serveRadius: Float
+}
+
+input ShopAvgOrderByAggregateInput {
+  serveRadius: SortOrder
 }
 
 type ShopCoordinates {
@@ -407,6 +473,7 @@ type ShopCountAggregate {
   id: Int!
   name: Int!
   ownerId: Int!
+  serveRadius: Int!
 }
 
 input ShopCountOrderByAggregateInput {
@@ -414,16 +481,20 @@ input ShopCountOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
   ownerId: SortOrder
+  serveRadius: SortOrder
 }
 
 type ShopGroupBy {
+  _avg: ShopAvgAggregate
   _count: ShopCountAggregate
   _max: ShopMaxAggregate
   _min: ShopMinAggregate
+  _sum: ShopSumAggregate
   createdAt: DateTime!
   id: String!
   name: String!
   ownerId: String!
+  serveRadius: Int
 }
 
 input ShopListRelationFilter {
@@ -437,6 +508,7 @@ type ShopMaxAggregate {
   id: String
   name: String
   ownerId: String
+  serveRadius: Int
 }
 
 input ShopMaxOrderByAggregateInput {
@@ -444,6 +516,7 @@ input ShopMaxOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
   ownerId: SortOrder
+  serveRadius: SortOrder
 }
 
 type ShopMinAggregate {
@@ -451,6 +524,7 @@ type ShopMinAggregate {
   id: String
   name: String
   ownerId: String
+  serveRadius: Int
 }
 
 input ShopMinOrderByAggregateInput {
@@ -458,6 +532,7 @@ input ShopMinOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
   ownerId: SortOrder
+  serveRadius: SortOrder
 }
 
 input ShopOrderByRelationAggregateInput {
@@ -465,13 +540,16 @@ input ShopOrderByRelationAggregateInput {
 }
 
 input ShopOrderByWithAggregationInput {
+  _avg: ShopAvgOrderByAggregateInput
   _count: ShopCountOrderByAggregateInput
   _max: ShopMaxOrderByAggregateInput
   _min: ShopMinOrderByAggregateInput
+  _sum: ShopSumOrderByAggregateInput
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
   ownerId: SortOrder
+  serveRadius: SortOrder
 }
 
 input ShopOrderByWithRelationInput {
@@ -482,6 +560,7 @@ input ShopOrderByWithRelationInput {
   owner: UserOrderByWithRelationInput
   ownerId: SortOrder
   products: ProductOrderByRelationAggregateInput
+  serveRadius: SortOrder
 }
 
 input ShopRelationFilter {
@@ -494,6 +573,7 @@ enum ShopScalarFieldEnum {
   id
   name
   ownerId
+  serveRadius
 }
 
 input ShopScalarWhereWithAggregatesInput {
@@ -504,6 +584,15 @@ input ShopScalarWhereWithAggregatesInput {
   id: StringWithAggregatesFilter
   name: StringWithAggregatesFilter
   ownerId: StringWithAggregatesFilter
+  serveRadius: IntNullableWithAggregatesFilter
+}
+
+type ShopSumAggregate {
+  serveRadius: Int
+}
+
+input ShopSumOrderByAggregateInput {
+  serveRadius: SortOrder
 }
 
 input ShopWhereInput {
@@ -517,6 +606,7 @@ input ShopWhereInput {
   owner: UserRelationFilter
   ownerId: StringFilter
   products: ProductListRelationFilter
+  serveRadius: IntNullableFilter
 }
 
 input ShopWhereUniqueInput {
