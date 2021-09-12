@@ -30,11 +30,11 @@ const seed = async (): Promise<void> => {
 
   await prisma.shopCoordinates.createMany({
     data: [
-      { id: "1", latitude: 37.3, longitude: -122.0, shopId: "1" }, // Cupertino
-      { id: "2", latitude: 37.3, longitude: -121.9, shopId: "2" }, // San Jose
-      { id: "3", latitude: 37.4, longitude: -122.1, shopId: "3" }, // Mountain View
-      { id: "4", latitude: 37.4, longitude: -122.1, shopId: "4" }, // Palo Alto
-      { id: "5", latitude: 37.5, longitude: -121.9, shopId: "5" }, // Fremont
+      { id: "1", latitude: 37.322998, longitude: -122.032182, shopId: "1" }, // Cupertino
+      { id: "2", latitude: 40.749276, longitude: -73.985643, shopId: "2" }, // Empire State Building
+      { id: "3", latitude: 29.97648, longitude: 31.131302, shopId: "3" }, // Pyramids of Giza
+      { id: "4", latitude: 40.689266, longitude: -74.044512, shopId: "4" }, // Statue of Liberty
+      { id: "5", latitude: 48.858093, longitude: 2.294694, shopId: "5" }, // Eiffel Tower
     ],
     skipDuplicates: true,
   });
