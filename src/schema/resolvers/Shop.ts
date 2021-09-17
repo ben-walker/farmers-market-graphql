@@ -1,18 +1,22 @@
 import {
   AggregateShopResolver,
   FindFirstShopResolver,
+  FindManyShopArgs,
   FindManyShopResolver,
   FindUniqueShopResolver,
   GroupByShopResolver,
   Shop,
   ShopRelationsResolver,
+  ShopWhereUniqueInput,
 } from "@generated/type-graphql";
+import { Prisma } from "@prisma/client";
 import {
   Args,
   ArgsType,
   Ctx,
   Field,
   Float,
+  Int,
   Query,
   Resolver,
 } from "type-graphql";
@@ -20,19 +24,28 @@ import {
 import { Context } from "../../context";
 
 @ArgsType()
-class SpatialSearchArgs {
+class NearbyLocationsArgs implements FindManyShopArgs {
   @Field(() => Float)
   latitude!: number;
 
   @Field(() => Float)
   longitude!: number;
+
+  @Field(() => Int, { nullable: true })
+  take: FindManyShopArgs["take"];
+
+  @Field(() => Int, { nullable: true })
+  skip: FindManyShopArgs["skip"];
+
+  @Field(() => ShopWhereUniqueInput, { nullable: true })
+  cursor: FindManyShopArgs["cursor"];
 }
 
 @Resolver(() => Shop)
 export class ShopResolver {
   @Query(() => [Shop])
-  async shopSpatialSearch(
-    @Args() { latitude, longitude }: SpatialSearchArgs,
+  async shopGetNearbyLocations(
+    @Args() { latitude, longitude, take, skip, cursor }: NearbyLocationsArgs,
     @Ctx() { prisma }: Context
   ): Promise<Shop[]> {
     const shops = await prisma.$queryRaw<Shop[]>`
@@ -41,6 +54,10 @@ export class ShopResolver {
       WHERE shop.id = coords."shopId"
         AND earth_box(ll_to_earth(${latitude}, ${longitude}), shop."serveRadius") @> ll_to_earth(coords.latitude, coords.longitude)
         AND earth_distance(ll_to_earth(${latitude}, ${longitude}), ll_to_earth(coords.latitude, coords.longitude)) <= shop."serveRadius"
+        AND shop.id >= ${cursor?.id || ""}
+      ORDER BY shop.id ASC
+      OFFSET ${skip || 0}
+      LIMIT ${take || Prisma.sql`ALL`}
     `;
 
     // Serialize values for typegraphql

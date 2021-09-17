@@ -401,7 +401,7 @@ type Query {
   product(where: ProductWhereUniqueInput!): Product
   products(cursor: ProductWhereUniqueInput, distinct: [ProductScalarFieldEnum!], orderBy: [ProductOrderByWithRelationInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
   shop(where: ShopWhereUniqueInput!): Shop
-  shopSpatialSearch(latitude: Float!, longitude: Float!): [Shop!]!
+  shopGetNearbyLocations(cursor: ShopWhereUniqueInput, latitude: Float!, longitude: Float!, skip: Int, take: Int): [Shop!]!
   shops(cursor: ShopWhereUniqueInput, distinct: [ShopScalarFieldEnum!], orderBy: [ShopOrderByWithRelationInput!], skip: Int, take: Int, where: ShopWhereInput): [Shop!]!
   user(where: UserWhereUniqueInput!): User
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
