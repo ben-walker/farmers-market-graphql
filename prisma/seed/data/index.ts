@@ -1,4 +1,2 @@
-export * from "./Product";
-export * from "./Shop";
-export * from "./ShopCoordinates";
-export * from "./User";
+export * from "./shop-coordinates";
+export * from "./user";
