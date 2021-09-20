@@ -34,7 +34,7 @@ model ShopCoordinates {
   id        String @id @default(cuid())
   latitude  Float
   longitude Float
-  shop      Shop   @relation(fields: [shopId], references: [id])
+  shop      Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
   shopId    String
 }
 
