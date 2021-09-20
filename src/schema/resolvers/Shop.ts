@@ -10,25 +10,16 @@ import {
   ShopWhereUniqueInput,
 } from "@generated/type-graphql";
 import { Prisma } from "@prisma/client";
-import {
-  Args,
-  ArgsType,
-  Ctx,
-  Field,
-  Float,
-  Int,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Args, ArgsType, Ctx, Field, Int, Query, Resolver } from "type-graphql";
 
 import { Context } from "../../context";
 
 @ArgsType()
 class NearbyLocationsArgs implements FindManyShopArgs {
-  @Field(() => Float)
+  @Field()
   latitude!: number;
 
-  @Field(() => Float)
+  @Field()
   longitude!: number;
 
   @Field(() => Int, { nullable: true })
