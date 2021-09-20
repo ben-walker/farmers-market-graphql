@@ -6,11 +6,23 @@ import {
   FindUniqueShopResolver,
   GroupByShopResolver,
   Shop,
+  ShopCount,
   ShopRelationsResolver,
   ShopWhereUniqueInput,
 } from "@generated/type-graphql";
 import { Prisma } from "@prisma/client";
-import { Args, ArgsType, Ctx, Field, Int, Query, Resolver } from "type-graphql";
+import {
+  Args,
+  ArgsType,
+  Ctx,
+  Field,
+  FieldResolver,
+  Int,
+  Maybe,
+  Query,
+  Resolver,
+  Root,
+} from "type-graphql";
 
 import { Context } from "../../context";
 
@@ -56,6 +68,19 @@ export class ShopResolver {
       ...shop,
       createdAt: new Date(shop.createdAt),
     }));
+  }
+
+  // Manually resolve _count on Shop
+  @FieldResolver()
+  async _count(
+    @Root() { id }: Shop,
+    @Ctx() { prisma }: Context
+  ): Promise<Maybe<ShopCount>> {
+    const shopSelect = await prisma.shop.findUnique({
+      where: { id },
+      select: { _count: true },
+    });
+    return shopSelect?._count;
   }
 }
 
