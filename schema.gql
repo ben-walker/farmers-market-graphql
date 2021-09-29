@@ -23,6 +23,37 @@ type AggregateUser {
   _min: UserMinAggregate
 }
 
+type Coordinates {
+  id: String!
+  latitude: Float!
+  longitude: Float!
+  shopId: String!
+}
+
+input CoordinatesOrderByWithRelationInput {
+  id: SortOrder
+  latitude: SortOrder
+  longitude: SortOrder
+  shop: ShopOrderByWithRelationInput
+  shopId: SortOrder
+}
+
+input CoordinatesRelationFilter {
+  is: CoordinatesWhereInput
+  isNot: CoordinatesWhereInput
+}
+
+input CoordinatesWhereInput {
+  AND: [CoordinatesWhereInput!]
+  NOT: [CoordinatesWhereInput!]
+  OR: [CoordinatesWhereInput!]
+  id: StringFilter
+  latitude: FloatFilter
+  longitude: FloatFilter
+  shop: ShopRelationFilter
+  shopId: StringFilter
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -414,7 +445,7 @@ enum QueryMode {
 
 type Shop {
   _count: ShopCount
-  coordinates: ShopCoordinates
+  coordinates: Coordinates
   createdAt: DateTime!
   id: String!
   name: String!
@@ -430,37 +461,6 @@ type ShopAvgAggregate {
 
 input ShopAvgOrderByAggregateInput {
   serveRadius: SortOrder
-}
-
-type ShopCoordinates {
-  id: String!
-  latitude: Float!
-  longitude: Float!
-  shopId: String!
-}
-
-input ShopCoordinatesOrderByWithRelationInput {
-  id: SortOrder
-  latitude: SortOrder
-  longitude: SortOrder
-  shop: ShopOrderByWithRelationInput
-  shopId: SortOrder
-}
-
-input ShopCoordinatesRelationFilter {
-  is: ShopCoordinatesWhereInput
-  isNot: ShopCoordinatesWhereInput
-}
-
-input ShopCoordinatesWhereInput {
-  AND: [ShopCoordinatesWhereInput!]
-  NOT: [ShopCoordinatesWhereInput!]
-  OR: [ShopCoordinatesWhereInput!]
-  id: StringFilter
-  latitude: FloatFilter
-  longitude: FloatFilter
-  shop: ShopRelationFilter
-  shopId: StringFilter
 }
 
 type ShopCount {
@@ -553,7 +553,7 @@ input ShopOrderByWithAggregationInput {
 }
 
 input ShopOrderByWithRelationInput {
-  coordinates: ShopCoordinatesOrderByWithRelationInput
+  coordinates: CoordinatesOrderByWithRelationInput
   createdAt: SortOrder
   id: SortOrder
   name: SortOrder
@@ -599,7 +599,7 @@ input ShopWhereInput {
   AND: [ShopWhereInput!]
   NOT: [ShopWhereInput!]
   OR: [ShopWhereInput!]
-  coordinates: ShopCoordinatesRelationFilter
+  coordinates: CoordinatesRelationFilter
   createdAt: DateTimeFilter
   id: StringFilter
   name: StringFilter

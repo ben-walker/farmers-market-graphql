@@ -49,8 +49,8 @@ const seed = async (): Promise<void> => {
     skipDuplicates: true,
   });
 
-  // Shop coordinates
-  await prisma.shopCoordinates.createMany({
+  // Coordinates
+  await prisma.coordinates.createMany({
     data: emptyArray(counts.userShop).map((_, i) => ({
       id: i.toString(),
       latitude: coordinates[i]?.latitude || 0,

@@ -1,2 +1,2 @@
-export * from "./shop-coordinates";
+export * from "./coordinates";
 export * from "./user";

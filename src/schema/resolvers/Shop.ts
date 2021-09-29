@@ -53,7 +53,7 @@ export class ShopResolver {
   ): Promise<Shop[]> {
     const shops = await prisma.$queryRaw<Shop[]>`
       SELECT *
-      FROM "Shop" AS shop, "ShopCoordinates" AS coords
+      FROM "Shop" AS shop, "Coordinates" AS coords
       WHERE shop.id = coords."shopId"
         AND earth_box(ll_to_earth(${latitude}, ${longitude}), shop."serveRadius") @> ll_to_earth(coords.latitude, coords.longitude)
         AND earth_distance(ll_to_earth(${latitude}, ${longitude}), ll_to_earth(coords.latitude, coords.longitude)) <= shop."serveRadius"

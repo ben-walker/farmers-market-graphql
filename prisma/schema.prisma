@@ -20,17 +20,17 @@ model Product {
 }
 
 model Shop {
-  coordinates ShopCoordinates?
-  createdAt   DateTime         @default(now())
-  id          String           @id @default(cuid())
+  coordinates Coordinates?
+  createdAt   DateTime     @default(now())
+  id          String       @id @default(cuid())
   name        String
-  owner       User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId     String
   products    Product[]
   serveRadius Int?
 }
 
-model ShopCoordinates {
+model Coordinates {
   id        String @id @default(cuid())
   latitude  Float
   longitude Float
