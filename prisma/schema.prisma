@@ -11,6 +11,14 @@ generator typegraphql {
   provider = "typegraphql-prisma"
 }
 
+model Coordinates {
+  id        String @id @default(cuid())
+  latitude  Float
+  longitude Float
+  shop      Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shopId    String
+}
+
 model Product {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
@@ -28,14 +36,6 @@ model Shop {
   ownerId     String
   products    Product[]
   serveRadius Int?
-}
-
-model Coordinates {
-  id        String @id @default(cuid())
-  latitude  Float
-  longitude Float
-  shop      Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  shopId    String
 }
 
 model User {
